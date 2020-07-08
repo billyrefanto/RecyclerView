@@ -13,10 +13,12 @@ import com.bumptech.glide.request.RequestOptions
 import com.dicoding.myrecyclerview.R
 import com.dicoding.myrecyclerview.model.Hero
 
-class CardViewHeroAdapter(private val listHero: ArrayList<Hero>) : RecyclerView.Adapter<CardViewHeroAdapter.CardViewViewHolder>() {
+class CardViewHeroAdapter(private val listHero: ArrayList<Hero>) :
+    RecyclerView.Adapter<CardViewHeroAdapter.CardViewViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewViewHolder {
-        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.item_cardview_hero, parent, false)
+        val view: View =
+            LayoutInflater.from(parent.context).inflate(R.layout.item_cardview_hero, parent, false)
         return CardViewViewHolder(view)
     }
 
@@ -28,9 +30,27 @@ class CardViewHeroAdapter(private val listHero: ArrayList<Hero>) : RecyclerView.
             .into(holder.imgPhoto)
         holder.tvName.text = hero.name
         holder.tvDetail.text = hero.detail
-        holder.btnFavorite.setOnClickListener { Toast.makeText(holder.itemView.context, "Favorite " + listHero[holder.adapterPosition].name, Toast.LENGTH_SHORT).show() }
-        holder.btnShare.setOnClickListener { Toast.makeText(holder.itemView.context, "Share " + listHero[holder.adapterPosition].name, Toast.LENGTH_SHORT).show() }
-        holder.itemView.setOnClickListener { Toast.makeText(holder.itemView.context, "Kamu memilih " + listHero[holder.adapterPosition].name, Toast.LENGTH_SHORT).show() }
+        holder.btnFavorite.setOnClickListener {
+            Toast.makeText(
+                holder.itemView.context,
+                "Favorite " + listHero[holder.adapterPosition].name,
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+        holder.btnShare.setOnClickListener {
+            Toast.makeText(
+                holder.itemView.context,
+                "Share " + listHero[holder.adapterPosition].name,
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+        holder.itemView.setOnClickListener {
+            Toast.makeText(
+                holder.itemView.context,
+                "Kamu memilih " + listHero[holder.adapterPosition].name,
+                Toast.LENGTH_SHORT
+            ).show()
+        }
     }
 
     override fun getItemCount(): Int {
@@ -44,4 +64,6 @@ class CardViewHeroAdapter(private val listHero: ArrayList<Hero>) : RecyclerView.
         var btnFavorite: Button = itemView.findViewById(R.id.btn_set_favorite)
         var btnShare: Button = itemView.findViewById(R.id.btn_set_share)
     }
+
+
 }

@@ -11,6 +11,11 @@ import com.dicoding.myrecyclerview.R
 import com.dicoding.myrecyclerview.model.Hero
 
 class GridHeroAdapter(val listHeroes: ArrayList<Hero>) : RecyclerView.Adapter<GridHeroAdapter.GridViewHolder>() {
+    private lateinit var onItemClickCallback: ListHeroAdapter.OnItemClickCallback
+
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback
+    }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): GridViewHolder {
         val view: View = LayoutInflater.from(viewGroup.context).inflate(R.layout.item_grid_hero, viewGroup, false)
@@ -22,6 +27,7 @@ class GridHeroAdapter(val listHeroes: ArrayList<Hero>) : RecyclerView.Adapter<Gr
             .load(listHeroes[position].photo)
             .apply(RequestOptions().override(350, 550))
             .into(holder.imgPhoto)
+        holder.itemView.setOnClickListener { onItemClickCallback.onItemClicked(listHeroes[holder.adapterPosition]) }
     }
 
     override fun getItemCount(): Int {
@@ -30,5 +36,8 @@ class GridHeroAdapter(val listHeroes: ArrayList<Hero>) : RecyclerView.Adapter<Gr
 
     inner class GridViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var imgPhoto: ImageView = itemView.findViewById(R.id.img_item_photo)
+    }
+    interface OnItemClickCallback : ListHeroAdapter.OnItemClickCallback {
+        override fun onItemClicked(data: Hero)
     }
 }
