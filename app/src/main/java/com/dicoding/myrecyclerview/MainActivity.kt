@@ -7,6 +7,7 @@ import android.view.MenuItem
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.dicoding.myrecyclerview.adapter.CardViewHeroAdapter
 import com.dicoding.myrecyclerview.adapter.GridHeroAdapter
 import com.dicoding.myrecyclerview.adapter.ListHeroAdapter
 import com.dicoding.myrecyclerview.model.Hero
@@ -43,6 +44,7 @@ class MainActivity : AppCompatActivity() {
         setMode(item.itemId)
         return super.onOptionsItemSelected(item)
     }
+
     private fun setMode(selectedMode: Int) {
         when (selectedMode) {
             R.id.action_list -> {
@@ -52,12 +54,20 @@ class MainActivity : AppCompatActivity() {
                 showRecyclerGrid()
             }
             R.id.action_cardview -> {
+                showRecyclerCardView()
             }
         }
     }
+
     private fun showRecyclerGrid() {
         rvHeroes.layoutManager = GridLayoutManager(this, 2)
         val gridHeroAdapter = GridHeroAdapter(list)
         rvHeroes.adapter = gridHeroAdapter
+    }
+
+    private fun showRecyclerCardView() {
+        rvHeroes.layoutManager = LinearLayoutManager(this)
+        val cardViewHeroAdapter = CardViewHeroAdapter(list)
+        rvHeroes.adapter = cardViewHeroAdapter
     }
 }
